@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home-detail',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeDetailPage implements OnInit {
 
-  constructor() { }
-
+  constructor(private loadingCtrl: LoadingController) { }
   ngOnInit() {
+    this.showLoading()
   }
-
+  async showLoading() {
+    const loading = await this.loadingCtrl.create({
+      cssClass:'custom-loading',
+      message: 'Loading...',
+      duration: 2000,
+    });
+    loading.present();
+  }
 }
