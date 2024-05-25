@@ -7,30 +7,40 @@ const routes: Routes = [
   {
     path: '',
     component: PlacePage,
-    children:[
+    children: [
       {
         path: '',
-        loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+        loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
       },
       {
         path: 'home',
-        loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
+          },
+          {
+            path: 'home-detail',
+            loadChildren: () => import('./home/home-detail/home-detail.module').then(m => m.HomeDetailPageModule)
+          },
+        ]
+
       },
       {
         path: 'speakers',
-        loadChildren: () => import('./speakers/speakers.module').then( m => m.SpeakersPageModule)
+        loadChildren: () => import('./speakers/speakers.module').then(m => m.SpeakersPageModule)
       },
       {
         path: 'map',
-        loadChildren: () => import('./map/map.module').then( m => m.MapPageModule)
+        loadChildren: () => import('./map/map.module').then(m => m.MapPageModule)
       },
     ]
   },
-  
 
-  
 
-  
+
+
+
 
 ];
 
@@ -38,4 +48,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class PlacePageRoutingModule {}
+export class PlacePageRoutingModule { }
